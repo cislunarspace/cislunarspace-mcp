@@ -1,0 +1,31 @@
+{
+  "name": "cislunarspace-mcp",
+  "version": "0.1.0",
+  "description": "地月空间术语词典的 MCP server，提供 search 与 get 两个工具",
+  "type": "module",
+  "bin": {
+    "cislunarspace-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build",
+    "pretest": "npm run build",
+    "test": "node --test test/*.test.js",
+    "smoke": "npm run build && node scripts/smoke.js"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^24.7.0",
+    "typescript": "^5.9.3"
+  }
+}
