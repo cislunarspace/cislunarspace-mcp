@@ -14,6 +14,8 @@
 
 需要 Node 20 以上。四种客户端都用 `npx` 拉取本仓库的标签版本，不需要预先安装。
 
+npm 12 起 git 依赖默认关闭，所以要带 `--allow-git=all`。npm 11.10 之前的版本不认识这个参数，但也只是被当作未知配置忽略，同样可用。等发布到 npm 官方仓库之后，这一串可以缩成 `npx -y cislunarspace-mcp`，进度见 [issue #1](https://github.com/cislunarspace/cislunarspace-mcp/issues/1)。
+
 Claude Desktop，写入 `claude_desktop_config.json`：
 
 ```json
@@ -21,7 +23,7 @@ Claude Desktop，写入 `claude_desktop_config.json`：
   "mcpServers": {
     "cislunarspace": {
       "command": "npx",
-      "args": ["-y", "github:cislunarspace/cislunarspace-mcp#v0.1.0"]
+      "args": ["--allow-git=all", "-y", "github:cislunarspace/cislunarspace-mcp#v0.1.1"]
     }
   }
 }
@@ -30,7 +32,7 @@ Claude Desktop，写入 `claude_desktop_config.json`：
 Claude Code：
 
 ```bash
-claude mcp add cislunarspace -- npx -y github:cislunarspace/cislunarspace-mcp#v0.1.0
+claude mcp add cislunarspace -- npx --allow-git=all -y github:cislunarspace/cislunarspace-mcp#v0.1.1
 ```
 
 Cursor，写入 `~/.cursor/mcp.json`，形状与 Claude Desktop 相同：
@@ -40,7 +42,7 @@ Cursor，写入 `~/.cursor/mcp.json`，形状与 Claude Desktop 相同：
   "mcpServers": {
     "cislunarspace": {
       "command": "npx",
-      "args": ["-y", "github:cislunarspace/cislunarspace-mcp#v0.1.0"]
+      "args": ["--allow-git=all", "-y", "github:cislunarspace/cislunarspace-mcp#v0.1.1"]
     }
   }
 }
@@ -54,7 +56,7 @@ VS Code，写入 `.vscode/mcp.json`：
     "cislunarspace": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "github:cislunarspace/cislunarspace-mcp#v0.1.0"]
+      "args": ["--allow-git=all", "-y", "github:cislunarspace/cislunarspace-mcp#v0.1.1"]
     }
   }
 }

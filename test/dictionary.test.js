@@ -29,8 +29,22 @@ const dictionary = {
           title: '晕轨道（Halo Orbit）',
           otherTitle: 'Halo Orbit',
           definition: '平动点附近的周期轨道，$L_1$ 与 $L_2$ 附近常见。',
-          keywords: ['Halo Orbit', 'NRHO'],
+          keywords: ['Halo Orbit', '近直线晕轨道'],
           url: '/glossary/orbits/halo-orbit/',
+        },
+        {
+          slug: 'nrho',
+          title: '近直线晕轨道',
+          otherTitle: 'Near-Rectilinear Halo Orbit, NRHO',
+          definition: '以稳定性界定的晕轨道族子集。',
+          keywords: ['近直线晕轨道'],
+        },
+        {
+          slug: 'northern-and-southern-nrho-families',
+          title: 'NRHO南北族轨道',
+          otherTitle: 'Northern and Southern NRHO Families',
+          definition: '近直线晕轨道按法向分量分为北族和南族。',
+          keywords: ['南北族'],
         },
       ],
     },
@@ -79,12 +93,17 @@ test('search 中文标题精确命中排第一', () => {
 
 test('search 英文名与关键词都能命中', () => {
   assert.equal(searchEntries(entries, 'halo orbit')[0].entry.slug, 'halo-orbit');
-  assert.equal(searchEntries(entries, 'NRHO')[0].entry.slug, 'halo-orbit');
   assert.equal(searchEntries(entries, 'ARO')[0].entry.slug, 'aro');
 });
 
+test('英文名拆词与关键词完全相等优先于标题包含', () => {
+  const hits = searchEntries(entries, 'NRHO');
+  assert.equal(hits[0].entry.slug, 'nrho');
+  assert.equal(hits[1].entry.slug, 'northern-and-southern-nrho-families');
+});
+
 test('search 多词元要求全部命中', () => {
-  assert.equal(searchEntries(entries, '晕轨道 nrho').length, 1);
+  assert.equal(searchEntries(entries, '晕轨道 nrho').length, 2);
   assert.equal(searchEntries(entries, '晕轨道 sims1997').length, 0);
 });
 

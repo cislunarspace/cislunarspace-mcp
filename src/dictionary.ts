@@ -62,18 +62,25 @@ function hits(haystack: string | null | undefined, needle: string): boolean {
 
 function scoreToken(entry: FlatEntry, token: string): number {
   const title = entry.title.toLowerCase();
+  const titleBase = entry.title.split(/[（(]/)[0].trim().toLowerCase();
   const other = entry.otherTitle?.toLowerCase();
+  const otherParts = (entry.otherTitle ?? '')
+    .split(/[,，、/（）()]/)
+    .map((part) => part.trim().toLowerCase())
+    .filter(Boolean);
   const slug = entry.slug.toLowerCase();
 
   if (title === token) return 100;
+  if (titleBase === token) return 95;
+  if (entry.keywords?.some((k) => k.toLowerCase() === token)) return 65;
+  if (entry.aliases?.some((a) => a.toLowerCase() === token)) return 65;
+  if (otherParts.includes(token)) return 65;
   if (title.includes(token)) return 60;
   if (other === token) return 55;
   if (other?.includes(token)) return 45;
-  if (entry.keywords?.some((k) => k.toLowerCase() === token)) return 50;
-  if (entry.aliases?.some((a) => a.toLowerCase() === token)) return 50;
+  if (slug === token) return 40;
   if (entry.keywords?.some((k) => k.toLowerCase().includes(token))) return 35;
   if (entry.aliases?.some((a) => a.toLowerCase().includes(token))) return 35;
-  if (slug === token) return 40;
   if (slug.includes(token)) return 20;
   if (hits(entry.definition, token)) return 15;
   if (hits(entry.categoryLabel, token)) return 5;
