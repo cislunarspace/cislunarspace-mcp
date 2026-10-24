@@ -9,7 +9,7 @@ import {
   plainDefinition,
   searchEntries,
 } from '../dist/dictionary.js';
-import { formatEntryText, formatSearchText } from '../dist/format.js';
+import { bibliographyEntries, formatEntryText, formatSearchText } from '../dist/format.js';
 
 const dictionary = {
   categories: [
@@ -44,7 +44,7 @@ const dictionary = {
           title: 'NRHO南北族轨道',
           otherTitle: 'Northern and Southern NRHO Families',
           definition: '近直线晕轨道按法向分量分为北族和南族。',
-          keywords: ['南北族'],
+          keywords: ['南北族', 'NRHO'],
         },
       ],
     },
@@ -96,7 +96,7 @@ test('search 英文名与关键词都能命中', () => {
   assert.equal(searchEntries(entries, 'ARO')[0].entry.slug, 'aro');
 });
 
-test('英文名拆词与关键词完全相等优先于标题包含', () => {
+test('英文拆词精确命中优先于其他词条的同关键词命中', () => {
   const hits = searchEntries(entries, 'NRHO');
   assert.equal(hits[0].entry.slug, 'nrho');
   assert.equal(hits[1].entry.slug, 'northern-and-southern-nrho-families');
@@ -127,6 +127,12 @@ test('formatSearchText 输出标题、分类与链接', () => {
   assert.match(text, /分类：任务轨道/);
   assert.match(text, /https:\/\/cislunarspace\.cn\/glossary\/orbits\/halo-orbit\//);
   assert.match(formatSearchText('无', []), /没有匹配/);
+});
+
+test('bibliographyEntries 读取工件的 entries 映射', () => {
+  const entries = { vaquero2014: { number: 1, formatted: '某篇文献' } };
+  assert.deepEqual(bibliographyEntries({ entries }), entries);
+  assert.throws(() => bibliographyEntries({}), /缺少 entries/);
 });
 
 test('formatEntryText 在键缺题录时输出引用键', () => {

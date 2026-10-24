@@ -7,7 +7,13 @@ import { z } from 'zod';
 
 import { defaultCacheDir, loadJsonWithCache } from './cache.js';
 import { extractCitationKeys, findEntry, flattenDictionary, searchEntries } from './dictionary.js';
-import { formatEntryText, formatSearchText, type Bibliography } from './format.js';
+import {
+  bibliographyEntries,
+  formatEntryText,
+  formatSearchText,
+  type Bibliography,
+  type BibliographyArtifact,
+} from './format.js';
 import type { Dictionary, FlatEntry } from './types.js';
 
 const require = createRequire(import.meta.url);
@@ -25,11 +31,11 @@ let bibliography: Bibliography | null = null;
 async function loadBibliography(): Promise<Bibliography | null> {
   if (bibliography) return bibliography;
   try {
-    const loaded = await loadJsonWithCache<Bibliography>({
+    const loaded = await loadJsonWithCache<BibliographyArtifact>({
       url: bibliographyUrl,
       cacheFile: join(cacheDir, 'bibliography.json'),
     });
-    bibliography = loaded.data;
+    bibliography = bibliographyEntries(loaded.data);
   } catch (err) {
     console.error(`[cislunarspace-mcp] 题录加载失败，退回引用键：${(err as Error).message}`);
   }

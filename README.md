@@ -23,7 +23,7 @@ Claude Desktop，写入 `claude_desktop_config.json`：
   "mcpServers": {
     "cislunarspace": {
       "command": "npx",
-      "args": ["--allow-git=all", "-y", "github:cislunarspace/cislunarspace-mcp#v0.1.1"]
+      "args": ["--allow-git=all", "-y", "github:cislunarspace/cislunarspace-mcp#v0.1.2"]
     }
   }
 }
@@ -32,7 +32,7 @@ Claude Desktop，写入 `claude_desktop_config.json`：
 Claude Code：
 
 ```bash
-claude mcp add cislunarspace -- npx --allow-git=all -y github:cislunarspace/cislunarspace-mcp#v0.1.1
+claude mcp add cislunarspace -- npx --allow-git=all -y github:cislunarspace/cislunarspace-mcp#v0.1.2
 ```
 
 Cursor，写入 `~/.cursor/mcp.json`，形状与 Claude Desktop 相同：
@@ -42,7 +42,7 @@ Cursor，写入 `~/.cursor/mcp.json`，形状与 Claude Desktop 相同：
   "mcpServers": {
     "cislunarspace": {
       "command": "npx",
-      "args": ["--allow-git=all", "-y", "github:cislunarspace/cislunarspace-mcp#v0.1.1"]
+      "args": ["--allow-git=all", "-y", "github:cislunarspace/cislunarspace-mcp#v0.1.2"]
     }
   }
 }
@@ -56,7 +56,7 @@ VS Code，写入 `.vscode/mcp.json`：
     "cislunarspace": {
       "type": "stdio",
       "command": "npx",
-      "args": ["--allow-git=all", "-y", "github:cislunarspace/cislunarspace-mcp#v0.1.1"]
+      "args": ["--allow-git=all", "-y", "github:cislunarspace/cislunarspace-mcp#v0.1.2"]
     }
   }
 }

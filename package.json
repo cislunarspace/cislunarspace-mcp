@@ -1,6 +1,6 @@
 {
   "name": "cislunarspace-mcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "地月空间术语词典的 MCP server，提供 search 与 get 两个工具",
   "type": "module",
   "bin": {

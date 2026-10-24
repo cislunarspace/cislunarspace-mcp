@@ -72,13 +72,13 @@ function scoreToken(entry: FlatEntry, token: string): number {
 
   if (title === token) return 100;
   if (titleBase === token) return 95;
+  if (otherParts.includes(token)) return 85;
+  if (slug === token) return 80;
+  if (other === token) return 75;
   if (entry.keywords?.some((k) => k.toLowerCase() === token)) return 65;
   if (entry.aliases?.some((a) => a.toLowerCase() === token)) return 65;
-  if (otherParts.includes(token)) return 65;
   if (title.includes(token)) return 60;
-  if (other === token) return 55;
   if (other?.includes(token)) return 45;
-  if (slug === token) return 40;
   if (entry.keywords?.some((k) => k.toLowerCase().includes(token))) return 35;
   if (entry.aliases?.some((a) => a.toLowerCase().includes(token))) return 35;
   if (slug.includes(token)) return 20;

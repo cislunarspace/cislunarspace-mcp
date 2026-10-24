@@ -2,6 +2,16 @@ import { extractCitationKeys, plainDefinition } from './dictionary.js';
 import type { FlatEntry, SearchHit } from './types.js';
 
 export type Bibliography = Record<string, { number?: number; formatted?: string }>;
+export interface BibliographyArtifact {
+  entries: Bibliography;
+}
+
+export function bibliographyEntries(artifact: BibliographyArtifact): Bibliography {
+  if (!artifact || typeof artifact.entries !== 'object' || artifact.entries === null) {
+    throw new Error('题录工件缺少 entries 映射');
+  }
+  return artifact.entries;
+}
 
 export function formatSearchText(query: string, hits: SearchHit[]): string {
   if (hits.length === 0) {
